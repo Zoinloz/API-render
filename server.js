@@ -9,6 +9,7 @@ const http = require('http').createServer(server);
 
 
 require('./routes/armors.js')(server);
+require('./routes/arms.js')(server);
 //server.use(express.static(path.join(__dirname, 'routes'))); //Récupère l'index.html dans le dossier maître "client"
 
 // require('./routes/armors.js')(server,fs);

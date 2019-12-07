@@ -14,9 +14,12 @@ module.exports = function(app){
                 res.status(501);
                 res.send({'msg':'Fail load file','success':'false','result':'null'});
             }else{
+                console.log('here ');
                 armorsObj = JSON.parse(data);
-                for(let i = 0 ; i < armorsObj.length ; i++){
-                    if(armorsObj[i].name == unname){
+                console.log(armorsObj);
+                console.log(armorsObj.armors.name);
+                for(let i = 0 ; i < armorsObj.armors ; i++){
+                    if(armorsObj.armors.name == unname){
                         res.status(200);
                         res.send({'msg':'Armor found !','success':'true','result':armorsObj[i].name});
                         return;

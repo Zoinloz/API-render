@@ -1,10 +1,10 @@
 {
   "armors": [
     {
-      "name": "nomArmure",
+      "name": "iron",
       "composition": [
         {
-          "type": "casque",
+          "type": "helmets",
           "name": "nomCasque",
           "value": "100"
         },
@@ -50,6 +50,16 @@
       "type": "arms",
       "name": "some comment",
       "value": "100"
+    },
+    {
+      "type": "arms",
+      "name": "iron",
+      "value": "100"
+    },
+    {
+      "type": "arms",
+      "name": "lol",
+      "value": "100"
     }
   ],
   "cape": [
@@ -59,9 +69,9 @@
       "value": "100"
     }
   ],
-  "torse": [
+  "chests": [
     {
-      "type": "torse",
+      "type": "chest",
       "name": "some comment",
       "value": "100"
     }
