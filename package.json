@@ -1,0 +1,24 @@
+{
+  "name": "api-armor",
+  "version": "1.0.0",
+  "description": "API REST ",
+  "main": "server.js",
+  "scripts": {
+    "json:server": "json-server --watch db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "server",
+    "rest",
+    "api",
+    "http",
+    "armor",
+    "express"
+  ],
+  "author": "Gaetan PATRUNO",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security"
+  }
+}

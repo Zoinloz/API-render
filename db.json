@@ -1,0 +1,49 @@
+{
+  "armors": [
+    {
+      "id": 1,
+      "name": "op",
+      "lastName": "Bills",
+      "age": 56,
+      "email": "fred.bill@gmail.com",
+      "postsId": "1"
+    },
+    {
+      "id": 2,
+      "firstName": "Marg",
+      "lastName": "Lazo",
+      "age": 20,
+      "email": "Marg.Lazo@gmail.com",
+      "postId": 1
+    }
+  ],
+  "helmets": [
+    {
+      "id": 1,
+      "name": "iron",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "Like",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "Dislike",
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "body": "it s ok",
+      "postId": 1
+    }
+  ]
+}
