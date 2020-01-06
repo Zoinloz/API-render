@@ -1,6 +1,7 @@
 {
   "armors": [
     {
+      "id":"1",
       "name": "iron",
       "composition": [
         {
@@ -33,6 +34,7 @@
   ],
   "helmets": [
     {
+      "id":"1",
       "type": "helmet",
       "name": "iron",
       "value": "100"
@@ -40,6 +42,7 @@
   ],
   "legs": [
     {
+      "id":"1",
       "type": "legs",
       "name": "gold",
       "value": "100"
@@ -47,16 +50,19 @@
   ],
   "arms": [
     {
+      "id":"1",
       "type": "arms",
       "name": "some comment",
       "value": "100"
     },
     {
+      "id":"2",
       "type": "arms",
       "name": "iron",
       "value": "100"
     },
     {
+      "id":"3",
       "type": "arms",
       "name": "lol",
       "value": "100"
@@ -64,6 +70,7 @@
   ],
   "cape": [
     {
+      "id":"1",
       "type": "cape",
       "name": "some comment",
       "value": "100"
@@ -71,6 +78,7 @@
   ],
   "chests": [
     {
+      "id":"1",
       "type": "chest",
       "name": "some comment",
       "value": "100"
