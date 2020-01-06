@@ -3,7 +3,7 @@
 ## Install nodes modules
 
  * Initialisation du projet
-    * npm init
+    * 
  * express 
     * npm install express --save
  * json server
