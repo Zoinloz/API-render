@@ -3,10 +3,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Chest = mongoose.model('Cloak');
+const Cloak = mongoose.model('Cloak');
 
 router.get('/', (req, res) => {
-    Chest.find((err, docs) => {
+    Cloak.find((err, docs) => {
         if (!err) {
             console.log(docs);
             docs.forEach(element => {
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
                 list: docs
             });
         } else {
-            console.log('Error in retrieving Cloak list : ' + err);
+            console.log('Error in retrieving Cloak list: ' + err);
         }
     });
 
@@ -41,7 +41,7 @@ function insertRecord(req, res) {
     cloak.name = req.body.Name;
     cloak.value = req.body.Value;
 
-    chest.save((err, doc) => {
+    cloak.save((err, doc) => {
         if (!err) {
             res.redirect('/cloaks');
         } else {
@@ -52,7 +52,7 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     console.log('id',req.body._id);
-    Chest.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+    Cloak.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (!err) {
             res.redirect('/cloaks');
         } else {
@@ -80,7 +80,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/delete/:id', (req, res) => {
-    Chest.findByIdAndDelete(req.params.id, (err, doc) => {
+    Cloak.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
             res.redirect('/cloak/list');
         } else {
