@@ -11,4 +11,4 @@ require('./model/armor.model');
 require('./model/cloak.model');
 require('./model/chest.model');
 require('./model/helmet.model');
-require('./model/leg.model');
+require('./model/legs.model');

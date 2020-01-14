@@ -1,0 +1,29 @@
+<h3>Legs List <a class="btn btn-secondary" href="/legs/add">Create a Cloak +</a></h3>
+
+<a class="btn btn-primary" href="/">Return to the Project</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.value}}</td>
+            <td>
+                <a href="/legss/{{this._id}}" aria-hidden="true"></a>
+                <a href="/legs/{{this._id}}">Update</a>
+                <a href="/legs/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

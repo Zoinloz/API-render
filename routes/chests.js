@@ -72,7 +72,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     Chest.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
-            res.redirect('/chest');
+            res.redirect('/chests');
         } else {
             console.log('Error in task delete : ' + err);
         }
