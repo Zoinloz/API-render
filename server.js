@@ -36,4 +36,4 @@ app.use('/Arms', Arms);
 app.use('/Cloaks', Cloaks);
 app.use('/Helmets', Helmets);
 app.use('/Legs', Legs);
-app.use('/Chests', Chests);
+app.use('/Chests', Chests); // Armure pour se protéger le torse 
