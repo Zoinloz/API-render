@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
     res.json("Hellow Cloak");
+    res.json("Hellow Cloak");
 });
 
 module.exports = router;
