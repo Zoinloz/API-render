@@ -51,12 +51,10 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-    console.log('id',req.body._id);
-    Cloak.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) {
-            res.redirect('/cloaks');
-        } else {
+    Cloak.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
+        if(err){
             console.log('Error during record update : ' + err);
+        }else{
             res.redirect('/cloaks');
         }
     });
@@ -73,7 +71,7 @@ router.get('/:id', (req, res) => {
         if (!err) {
             res.render("layouts/cloak/addOrEdit", {
                 viewTitle: "Update Task",
-                task: doc
+                cloak: doc
             });
         }
     });
