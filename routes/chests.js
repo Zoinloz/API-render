@@ -8,6 +8,8 @@ const Chest = mongoose.model('Chest');
 router.get('/', (req, res) => {
     Chest.find((err, docs) => {
         if (!err) {
+            // res.status(200);
+            // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
             res.render("layouts/chest/list", {
                 list: docs
             });
@@ -72,7 +74,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     Chest.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
-            res.redirect('/chest');
+            res.redirect('/chests');
         } else {
             console.log('Error in task delete : ' + err);
         }
