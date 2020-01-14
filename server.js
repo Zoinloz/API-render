@@ -11,7 +11,7 @@ const app = express();
 // Controller requires
 const Armors = require(path.join(__dirname, 'routes', 'armors'));
 const Arms = require(path.join(__dirname, 'routes', 'arms'));
-const Cloak = require(path.join(__dirname, 'routes', 'cloaks'));
+const Cloaks = require(path.join(__dirname, 'routes', 'cloaks'));
 const Helmets = require(path.join(__dirname, 'routes', 'helmets'));
 const Legs = require(path.join(__dirname, 'routes', 'legs'));
 const Chests = require(path.join(__dirname, 'routes', 'chests'));
@@ -33,7 +33,7 @@ app.listen(3000, () => {
 //Configure routes
 app.use('/', Armors);
 app.use('/Arms', Arms);
-app.use('/Cloak', Cloak);
+app.use('/Cloaks', Cloaks);
 app.use('/Helmets', Helmets);
 app.use('/Legs', Legs);
 app.use('/Chests', Chests);
