@@ -18,7 +18,13 @@
   "author": "Gaetan PATRUNO",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "fs": "0.0.1-security"
+    "express-handlebars": "^3.1.0",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.8.7"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0"
   }
 }

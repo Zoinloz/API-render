@@ -1,48 +1,39 @@
 'use strict';
 
+require('./mongo'); //Connection to MongoDB
 //Imports
 const express = require('express');
-const fs = require('fs');
 const path = require('path'); //adapte le chemin en fonction de l'os
+const exphbs = require('express-handlebars');
+const bodyparser = require('body-parser');
+const app = express();
 
-//Instanciate
-const server = express();
-const http = require('http').createServer(server);
+// Controller requires
+const Armors = require(path.join(__dirname, 'routes', 'armors'));
+const Arms = require(path.join(__dirname, 'routes', 'arms'));
+const Cloak = require(path.join(__dirname, 'routes', 'cloaks'));
+const Helmets = require(path.join(__dirname, 'routes', 'helmets'));
+const Legs = require(path.join(__dirname, 'routes', 'legs'));
+const Chests = require(path.join(__dirname, 'routes', 'chests'));
 
+//------------------------------------------------LOCALHOST----------------------------------
+app.use(bodyparser.urlencoded({
+	extended: true
+}));
+app.use(bodyparser.json());
+app.set('views' , path.join(__dirname, '/views/'));
+app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
+app.set('view engine', 'hbs');
 
-require('./routes/armors.js')(server);
-require('./routes/arms.js')(server);
-//server.use(express.static(path.join(__dirname, 'routes'))); //Récupère l'index.html dans le dossier maître "client"
-
-// require('./routes/armors.js')(server,fs);
-// require('./routes/armors.js')(server,fs);
-// require('./routes/armors.js')(server,fs);
+//Création du serveur Web
+app.listen(3000, () => {
+	console.log('Express server started on port 3000');
+})
 
 //Configure routes
-server.get('/db', function (req, res) {
-    if (req) {
-        console.log('test1');
-    }
-    if (res) {
-        console.log('test2');
-    }
-    fs.readFile('./db.json', function (err, data) {
-        console.log('Get DB');
-        if (data) {
-            res.setHeader('Content-Type', 'text/json');
-            res.status(200);
-            res.send('{"success": "true","msg": "File loaded", "result":' + data + '}');
-        }
-        if (err) {
-            res.setHeader('Content-Type', 'text/json');
-            res.status(500);
-            res.send('{"success": "false","msg": "Failure read file", "result": null}');
-        }
-    });
-});
-
-
-//Lunch server
-server.listen(3000, function () {
-    console.log('server started on port 3000');
-});
+app.use('/', Armors);
+app.use('/Arms', Arms);
+app.use('/Cloak', Cloak);
+app.use('/Helmets', Helmets);
+app.use('/Legs', Legs);
+app.use('/Chests', Chests);

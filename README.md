@@ -12,3 +12,5 @@
     * json-server --watch db.json
  * fs (read json files)
     * npm install fs
+    
+npm i -D handlebars@4.5.0
