@@ -20,10 +20,8 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     if (req.body._id == '') {
-        console.log("ADD");
         insertRecord(req, res);
     } else {
-        console.log("update");
         updateRecord(req, res);
     }
 });
@@ -49,18 +47,9 @@ function updateRecord(req, res) {
         if(err){
             console.log('Error during record update : ' + err);
         }else{
-            console.log('During record update OK');
             res.redirect('/chests');
         }
     });
-    // Chest.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-    //     if (!err) {
-    //         res.redirect('/chests');
-    //     } else {
-    //         console.log('Error during record update : ' + err);
-    //         res.redirect('/chests');
-    //     }
-    // });
 }
 
 router.get('/add', (req, res) => {
@@ -83,7 +72,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     Chest.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
-            res.redirect('/task/list');
+            res.redirect('/chest');
         } else {
             console.log('Error in task delete : ' + err);
         }
