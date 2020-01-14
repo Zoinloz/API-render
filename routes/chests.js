@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
     Chest.findById(req.params.id, (err, doc) => {
         if (!err) {
             res.render("layouts/chest/addOrEdit", {
-                viewTitle: "Update Task",
+                viewTitle: "Update chest",
                 chest: doc
             });
         }
@@ -76,7 +76,7 @@ router.get('/delete/:id', (req, res) => {
         if (!err) {
             res.redirect('/chests');
         } else {
-            console.log('Error in task delete : ' + err);
+            console.log('Error in chest delete : ' + err);
         }
     });
 });

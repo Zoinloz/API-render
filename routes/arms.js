@@ -3,10 +3,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Chest = mongoose.model('Chest');
+const Arm = mongoose.model('Arm');
 
 router.get('/', (req, res) => {
-    Chest.find((err, docs) => {
+    Arm.find((err, docs) => {
         if (!err) {
             // res.status(200);
             // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
                 list: docs
             });
         } else {
-            console.log('Error in retrieving Chest list : ' + err);
+            console.log('Error in retrieving arm list : ' + err);
         }
     });
 
@@ -29,42 +29,42 @@ router.post('/add', (req, res) => {
 });
 
 function insertRecord(req, res) {
-    let chest = new Chest();
-    chest.id = req.body.Id;
-    chest.type = req.body.Type;
-    chest.name = req.body.Name;
-    chest.value = req.body.Value;
+    let arm = new Arm();
+    arm.id = req.body.Id;
+    arm.type = req.body.Type;
+    arm.name = req.body.Name;
+    arm.value = req.body.Value;
 
-    chest.save((err, doc) => {
+    arm.save((err, doc) => {
         if (!err) {
-            res.redirect('/chests');
+            res.redirect('/arms');
         } else {
-            console.log('Error during record insertion Chest : ' + err);
+            console.log('Error during record insertion arm : ' + err);
         }
     });
 }
 
 function updateRecord(req, res) {
-    Chest.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
+    Arm.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
         if(err){
             console.log('Error during record update : ' + err);
         }else{
-            res.redirect('/chests');
+            res.redirect('/arms');
         }
     });
 }
 
 router.get('/add', (req, res) => {
-    res.render("layouts/chest/addOrEdit", {
-        viewTitle: "Add a Chest"
+    res.render("layouts/arm/addOrEdit", {
+        viewTitle: "Add a arm"
     });
 });
 
 router.get('/:id', (req, res) => {
-    Chest.findById(req.params.id, (err, doc) => {
+    Arm.findById(req.params.id, (err, doc) => {
         if (!err) {
-            res.render("layouts/chest/addOrEdit", {
-                viewTitle: "Update Task",
+            res.render("layouts/arm/addOrEdit", {
+                viewTitle: "Update arm",
                 chest: doc
             });
         }
@@ -72,11 +72,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/delete/:id', (req, res) => {
-    Chest.findByIdAndDelete(req.params.id, (err, doc) => {
+    Arm.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
-            res.redirect('/chests');
+            res.redirect('/arms');
         } else {
-            console.log('Error in task delete : ' + err);
+            console.log('Error in arm delete : ' + err);
         }
     });
 });

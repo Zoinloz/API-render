@@ -1,11 +1,11 @@
 <h3>{{viewTitle}}</h3>
 
-<form action="/chests/add" method="POST">
+<form action="/arms/add" method="POST">
     <input type="hidden" name="_id" value="{{chest._id}}">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Type</label>
-            <input type="text" class="form-control" name="Type" placeholder="Type" value="Chest" readonly required>
+            <input type="text" class="form-control" name="Type" placeholder="Type" value="Arms" readonly required>
         </div>
         <div class="form-group col-md-6">
             <label>ID</label>
@@ -14,15 +14,15 @@
     </div>
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" name="Name" placeholder="Name your chests" value="{{chest.name}}" required>
+        <input type="text" class="form-control" name="Name" placeholder="Name your arms" value="{{chest.name}}" required>
     </div>
     <div class="form-group">
         <label>Value </label>
-        <input type="number" class="form-control" name="Value" placeholder="Value of your Chest" value="{{chest.value}}" required>
+        <input type="number" class="form-control" name="Value" placeholder="Value of your arms" value="{{chest.value}}" required>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>
-        <a class="btn btn-secondary" href="/chests">View All</a>
+        <a class="btn btn-secondary" href="/arms">View All</a>
     </div>
 </form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
