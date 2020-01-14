@@ -1,0 +1,29 @@
+<h3>Cloaks List <a class="btn btn-secondary" href="/cloaks/add">Create a Cloak +</a></h3>
+
+<a class="btn btn-primary" href="/">Return to the Project</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{this.type}}</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.value}}</td>
+            <td>
+                <a href="/cloaks/{{this._id}}" aria-hidden="true"></a>
+                <a href="/cloaks/{{this._id}}">Update</a>
+                <a href="/cloaks/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

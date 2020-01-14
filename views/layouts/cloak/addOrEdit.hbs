@@ -1,0 +1,28 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/cloaks/add" method="POST">
+    <input type="hidden" name="_id" value="{{cloak._id}}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Type</label>
+            <input type="text" class="form-control" name="Type" placeholder="Type" value="Cloak" readonly required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>ID</label>
+            <input type="number" class="form-control" name="Id" placeholder="ID" value="1">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Name your cloak" value="{{cloak.name}}" required>
+    </div>
+    <div class="form-group">
+        <label>Value </label>
+        <input type="number" class="form-control" name="Value" placeholder="Value of your cloak" value="{{cloak.value}}" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info">Envoyer</button>
+        <a class="btn btn-secondary" href="/cloaks">View All</a>
+    </div>
+</form>
+<a class="btn btn-primary" href="/">Return to the Project</a>
