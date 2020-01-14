@@ -8,11 +8,6 @@ const Chest = mongoose.model('Chest');
 router.get('/', (req, res) => {
     Chest.find((err, docs) => {
         if (!err) {
-            console.log(docs);
-            docs.forEach(element => {
-                console.log(element.name);
-            });
-            // res.json(docs);
             res.render("layouts/chest/list", {
                 list: docs
             });
@@ -24,12 +19,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-    console.log("ADD");
-    console.log(req.body._id,req.body._id == '');
-    console.log(req.body.Name);
     if (req.body._id == '') {
+        console.log("ADD");
         insertRecord(req, res);
     } else {
+        console.log("update");
         updateRecord(req, res);
     }
 });
@@ -51,15 +45,22 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-    console.log('id',req.body._id);
-    Chest.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) {
-            res.redirect('/chests');
-        } else {
+    Chest.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
+        if(err){
             console.log('Error during record update : ' + err);
-            res.redirect('/task');
+        }else{
+            console.log('During record update OK');
+            res.redirect('/chests');
         }
     });
+    // Chest.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+    //     if (!err) {
+    //         res.redirect('/chests');
+    //     } else {
+    //         console.log('Error during record update : ' + err);
+    //         res.redirect('/chests');
+    //     }
+    // });
 }
 
 router.get('/add', (req, res) => {
@@ -71,9 +72,9 @@ router.get('/add', (req, res) => {
 router.get('/:id', (req, res) => {
     Chest.findById(req.params.id, (err, doc) => {
         if (!err) {
-            res.render("layouts/task/addOrEdit", {
+            res.render("layouts/chest/addOrEdit", {
                 viewTitle: "Update Task",
-                task: doc
+                chest: doc
             });
         }
     });
