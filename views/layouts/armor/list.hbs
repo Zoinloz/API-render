@@ -1,4 +1,4 @@
-<h3>Legs List <a class="btn btn-secondary" href="/legs/add">Create a Legs +</a></h3>
+<h3>Armors List <a class="btn btn-secondary" href="/armors/add">Create a Armor +</a></h3>
 
 <a class="btn btn-primary" href="/">Return to the Project</a>
 <table class="table table-striped">
@@ -19,9 +19,9 @@
             <td>{{this.name}}</td>
             <td>{{this.value}}</td>
             <td>
-                <a href="/legss/{{this._id}}" aria-hidden="true"></a>
-                <a href="/legs/{{this._id}}">Update</a>
-                <a href="/legs/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
+                <a href="/armors/{{this._id}}" aria-hidden="true"></a>
+                <a href="/armors/{{this._id}}">Update</a>
+                <a href="/armors/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
             </td>
         </tr>
         {{/each}}

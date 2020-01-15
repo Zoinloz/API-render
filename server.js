@@ -9,6 +9,7 @@ const bodyparser = require('body-parser');
 const app = express();
 
 // Controller requires
+const Racine = require(path.join(__dirname, 'routes', 'racine'));
 const Armors = require(path.join(__dirname, 'routes', 'armors'));
 const Arms = require(path.join(__dirname, 'routes', 'arms'));
 const Cloaks = require(path.join(__dirname, 'routes', 'cloaks'));
@@ -31,9 +32,11 @@ app.listen(3000, () => {
 })
 
 //Configure routes
-app.use('/', Armors);
+app.use('/', Racine);
 app.use('/Arms', Arms);
 app.use('/Cloaks', Cloaks);
 app.use('/Helmets', Helmets);
 app.use('/Legs', Legs);
-app.use('/Chests', Chests); // Armure pour se protéger le torse 
+app.use('/Chests', Chests); // Armure pour se protéger le torse
+app.use('/Armors', Armors);
+
