@@ -65,7 +65,7 @@ router.get('/:id', (req, res) => {
         if (!err) {
             res.render("layouts/arm/addOrEdit", {
                 viewTitle: "Update arm",
-                arms: doc
+                arm: doc
             });
         }
     });
