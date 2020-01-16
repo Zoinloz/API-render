@@ -8,65 +8,72 @@ const Chest = mongoose.model('Chest');
 router.get('/', (req, res) => {
     Chest.find((err, docs) => {
         if (!err) {
-            // res.status(200);
-            // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
-            res.render("layouts/chest/list", {
-                list: docs
-            });
+            if (docs.length != 0) {
+                res.status(200);
+                res.send({ 'msg': 'the Chests list !', 'success': 'true', 'result': docs });
+            } else {
+                res.status(200);
+                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
+            }
         } else {
-            console.log('Error in retrieving Chest list : ' + err);
+            res.status(500);
+            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
         }
     });
 
 });
 
 router.post('/add', (req, res) => {
-    if (req.body._id == '') {
-        insertRecord(req, res);
-    } else {
-        updateRecord(req, res);
-    }
+    insertRecord(req, res);
 });
 
 function insertRecord(req, res) {
     let chest = new Chest();
-    chest.id = req.body.Id;
-    chest.type = req.body.Type;
-    chest.name = req.body.Name;
-    chest.value = req.body.Value;
+    chest.id = req.body.id;
+    chest.type = "Chest";
+    chest.name = req.body.name;
+    chest.value = req.body.value;
 
     chest.save((err, doc) => {
         if (!err) {
-            res.redirect('/chests');
+            console.log(req.body);
+            res.status(201).send({ 'msg': 'Chest Added !', 'success': 'true', 'result': doc });
         } else {
-            console.log('Error during record insertion Chest : ' + err);
+            res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
         }
     });
 }
 
 function updateRecord(req, res) {
-    Chest.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
-        if(err){
-            console.log('Error during record update : ' + err);
-        }else{
-            res.redirect('/chests');
+    Chest.findOneAndUpdate({name: req.params.name}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+        if (err) {
+            res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
+        } else {
+            res.status(200).send({ 'msg': 'Chest update !', 'success': 'true', 'result': doc });
         }
     });
 }
 
-router.get('/add', (req, res) => {
-    res.render("layouts/chest/addOrEdit", {
-        viewTitle: "Add a Chest"
-    });
+router.put('/:id', (req, res) => {
+    console.log(req.body);
+    console.log(req.params);
+    updateRecord(req, res);
+    // Chest.findById({name: req.params.name}, (err, doc) => {
+    //     if (!err) {
+    //         res.status(200).send({ 'msg': 'Chest update !', 'success': 'true', 'result': doc });
+    //     }
+    // });
 });
 
-router.get('/:id', (req, res) => {
-    Chest.findById(req.params.id, (err, doc) => {
+router.delete('/delete', (req, res) => {
+    Chest.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
-            res.render("layouts/chest/addOrEdit", {
-                viewTitle: "Update chest",
-                chest: doc
-            });
+            res.setHeader("Content-Type", "application/json");
+            console.log(req.body);
+            res.status(200).send(req.body);
+            //res.redirect('/chests');
+        } else {
+            console.log('Error in chest delete : ' + err);
         }
     });
 });

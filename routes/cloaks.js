@@ -79,6 +79,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/delete/:id', (req, res) => {
     Cloak.findByIdAndDelete(req.params.id, (err, doc) => {
+        res.s
         if (!err) {
             res.redirect('/cloak/list');
         } else {

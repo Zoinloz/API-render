@@ -6,6 +6,9 @@ mongoose.connect('mongodb://localhost:27017/API',{ useNewUrlParser: true, useUni
     else { console.log('Error in DB Connection : ' + error)}
 });
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 require('./model/arm.model');
 require('./model/armor.model');
 require('./model/cloak.model');
