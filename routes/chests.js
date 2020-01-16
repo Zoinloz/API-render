@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 //Get one of Chest with the name url: http://localhost:3000/chests/<name>   Method : GET
 router.get('/:name', (req, res) => {
-    Chest.findById({name: req.params.name}, (err, doc) => {
+    Chest.findOne({name: req.params.name}, (err, doc) => {
         if (!err && doc!= null) {
             res.status(200).send({ 'msg': 'Chest found !', 'success': 'true', 'result': doc });
         }else{
@@ -72,9 +72,9 @@ router.delete('/:id', (req, res) => {
         if(!err && doc!= null){
             Chest.findByIdAndDelete(doc._id, (err, doc) => {
                 if (!err) {
-                    res.status(200).send({ 'msg': 'Chest Deleted !', 'success': 'true', 'result': doc });
+                    res.status(200).send({'msg': 'Chest Deleted !', 'success': 'true', 'result': doc });
                 } else {
-                    res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                    res.status(500).send({'msg': 'Error while delete', 'success': 'false', 'result': err });
                 }
             });
         }else{
