@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-    let legs = new Arm();
+    let legs = new Legs();
     legs.type = "Legs";
     legs.name = req.body.name;
     legs.value = req.body.value;
