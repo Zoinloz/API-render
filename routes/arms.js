@@ -8,77 +8,67 @@ const Arm = mongoose.model('Arm');
 router.get('/', (req, res) => {
     Arm.find((err, docs) => {
         if (!err) {
-            // res.status(200);
-            // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
-            res.render("layouts/arm/list", {
-                list: docs
-            });
+            if (docs.length != 0) {
+                res.status(200);
+                res.send({ 'msg': 'the Arms list !', 'success': 'true', 'result': docs });
+            } else {
+                res.status(200);
+                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
+            }
         } else {
-            console.log('Error in retrieving arm list : ' + err);
+            res.status(500);
+            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
         }
     });
 
 });
 
 router.post('/add', (req, res) => {
-    if (req.body._id == '') {
-        insertRecord(req, res);
-    } else {
-        updateRecord(req, res);
-    }
-});
-
-function insertRecord(req, res) {
     let arm = new Arm();
-    arm.id = req.body.Id;
-    arm.type = req.body.Type;
-    arm.name = req.body.Name;
-    arm.value = req.body.Value;
+    arm.type = "Arm";
+    arm.name = req.body.name;
+    arm.value = req.body.value;
 
     arm.save((err, doc) => {
         if (!err) {
-            res.redirect('/arms');
+            res.status(201).send({ 'msg': 'Arm Added !', 'success': 'true', 'result': doc });
         } else {
-            console.log('Error during record insertion arm : ' + err);
+            res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
         }
-    });
-}
-
-function updateRecord(req, res) {
-    Arm.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
-        if(err){
-            console.log('Error during record update : ' + err);
-        }else{
-            res.redirect('/arms');
-        }
-    });
-}
-
-router.get('/add', (req, res) => {
-    res.render("layouts/arm/addOrEdit", {
-        viewTitle: "Add a arm"
     });
 });
 
-router.get('/:id', (req, res) => {
-    Arm.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("layouts/arm/addOrEdit", {
-                viewTitle: "Update arm",
-                arm: doc
+    // Chest.findById({name: req.params.name}, (err, doc) => {
+    //     if (!err) {
+    //         res.status(200).send({ 'msg': 'Chest update !', 'success': 'true', 'result': doc });
+    //     }
+    // });
+
+router.put('/:id', (req, res) => {
+    Arm.findOneAndUpdate({id: req.params.id}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+        if (err) {
+            res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
+        } else {
+            res.status(200).send({ 'msg': 'Arm update !', 'success': 'true', 'result': doc });
+        }
+    });
+});
+
+router.delete('/delete/:id', (req, res) => {
+    Arm.findOne({id: req.params.id}, function (err, doc) {
+        if(!err){
+            Arm.findByIdAndDelete(doc._id, (err, doc) => {
+                if (!err) {
+                    res.status(200).send({ 'msg': 'Arm Deleted !', 'success': 'true', 'result': doc });
+                } else {
+                    res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                }
             });
+        }else{
+            res.status(500).send({ 'msg': 'Error Object not found', 'success': 'false', 'result': err });
         }
     });
-});
 
-router.get('/delete/:id', (req, res) => {
-    Arm.findByIdAndDelete(req.params.id, (err, doc) => {
-        if (!err) {
-            res.redirect('/arms');
-        } else {
-            console.log('Error in arm delete : ' + err);
-        }
-    });
 });
 
 module.exports = router;

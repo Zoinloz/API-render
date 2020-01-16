@@ -8,83 +8,67 @@ const Legs = mongoose.model('Legs');
 router.get('/', (req, res) => {
     Legs.find((err, docs) => {
         if (!err) {
-            console.log(docs);
-            docs.forEach(element => {
-                console.log(element.name);
-            });
-            // res.json(docs);
-            res.render("layouts/legs/list", {
-                list: docs
-            });
+            if (docs.length != 0) {
+                res.status(200);
+                res.send({ 'msg': 'the Legs list !', 'success': 'true', 'result': docs });
+            } else {
+                res.status(200);
+                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
+            }
         } else {
-            console.log('Error in retrieving Legs list: ' + err);
+            res.status(500);
+            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
         }
     });
 
 });
 
 router.post('/add', (req, res) => {
-    console.log("ADD");
-    console.log(req.body._id,req.body._id == '');
-    console.log(req.body.Name);
-    if (req.body._id == '') {
-        insertRecord(req, res);
-    } else {
-        updateRecord(req, res);
-    }
-});
-
-function insertRecord(req, res) {
-    let legs = new Legs();
-    legs.id = req.body.Id;
-    legs.type = req.body.Type;
-    legs.name = req.body.Name;
-    legs.value = req.body.Value;
+    let legs = new Arm();
+    legs.type = "Legs";
+    legs.name = req.body.name;
+    legs.value = req.body.value;
 
     legs.save((err, doc) => {
         if (!err) {
-            res.redirect('/legs');
+            res.status(201).send({ 'msg': 'Legs Added !', 'success': 'true', 'result': doc });
         } else {
-            console.log('Error during record insertion Legs : ' + err);
+            res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
         }
-    });
-}
-
-function updateRecord(req, res) {
-    Legs.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
-        if(err){
-            console.log('Error during record update : ' + err);
-        }else{
-            res.redirect('/legs');
-        }
-    });
-}
-
-router.get('/add', (req, res) => {
-    res.render("layouts/legs/addOrEdit", {
-        viewTitle: "Add a Legs"
     });
 });
 
-router.get('/:id', (req, res) => {
-    Legs.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("layouts/legs/addOrEdit", {
-                viewTitle: "Update Legs",
-                legs: doc
+    // Chest.findById({name: req.params.name}, (err, doc) => {
+    //     if (!err) {
+    //         res.status(200).send({ 'msg': 'Chest update !', 'success': 'true', 'result': doc });
+    //     }
+    // });
+
+router.put('/:id', (req, res) => {
+    Legs.findOneAndUpdate({id: req.params.id}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+        if (err) {
+            res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
+        } else {
+            res.status(200).send({ 'msg': 'Legs update !', 'success': 'true', 'result': doc });
+        }
+    });
+});
+
+router.delete('/delete/:id', (req, res) => {
+    Legs.findOne({id: req.params.id}, function (err, doc) {
+        if(!err){
+            Legs.findByIdAndDelete(doc._id, (err, doc) => {
+                if (!err) {
+                    res.status(200).send({ 'msg': 'Legs Deleted !', 'success': 'true', 'result': doc });
+                } else {
+                    res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                }
             });
+        }else{
+            res.status(500).send({ 'msg': 'Error Object not found', 'success': 'false', 'result': err });
         }
     });
-});
 
-router.get('/delete/:id', (req, res) => {
-    Legs.findByIdAndDelete(req.params.id, (err, doc) => {
-        if (!err) {
-            res.redirect('/legs');
-        } else {
-            console.log('Error in legs delete : ' + err);
-        }
-    });
 });
 
 module.exports = router;
