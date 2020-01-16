@@ -28,6 +28,7 @@ router.post('/add', (req, res) => {
 });
 
 function insertRecord(req, res) {
+    console.log(req.body)
     let chest = new Chest();
     chest.id = req.body.id;
     chest.type = "Chest";
@@ -36,7 +37,6 @@ function insertRecord(req, res) {
 
     chest.save((err, doc) => {
         if (!err) {
-            console.log(req.body);
             res.status(201).send({ 'msg': 'Chest Added !', 'success': 'true', 'result': doc });
         } else {
             res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
@@ -45,7 +45,7 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-    Chest.findOneAndUpdate({name: req.params.name}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+    Chest.findOneAndUpdate({id: req.params.id}, { name: req.body.name, value: req.body.value }, function (err, doc) {
         if (err) {
             res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
         } else {
@@ -65,27 +65,20 @@ router.put('/:id', (req, res) => {
     // });
 });
 
-router.delete('/delete', (req, res) => {
-    Chest.findByIdAndDelete(req.params.id, (err, doc) => {
-        if (!err) {
-            res.setHeader("Content-Type", "application/json");
-            console.log(req.body);
-            res.status(200).send(req.body);
-            //res.redirect('/chests');
-        } else {
-            console.log('Error in chest delete : ' + err);
-        }
-    });
-});
-
 router.delete('/delete/:id', (req, res) => {
-    Chest.findByIdAndDelete(req.params.id, (err, doc) => {
-        if (!err) {
-            res.redirect('/chests');
-        } else {
-            console.log('Error in chest delete : ' + err);
-        }
+    Chest.findOne({id: req.params.id}, function (err, doc) {
+        console.log(doc);
+        Chest.findByIdAndDelete(doc._id, (err, doc) => {
+            if (!err) {
+                console.log(req.body);
+                res.status(200).send({ 'msg': 'Chest Deleted !', 'success': 'true', 'result': doc });
+            } else {
+                res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                console.log('Error in chest delete : ' + err);
+            }
+        });
     });
+
 });
 
 module.exports = router;

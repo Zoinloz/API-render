@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const armorSchema = new mongoose.Schema({
- id: { type: String, required: true, unique: true, trim: true },
+ id: { type: String, required: true, unique: true, trim: true, default: 0},
  name: { type: String, required: true, unique: true, trim: true },
  composition: {
    helmet: { type: mongoose.Types.ObjectId, ref: "Helmet", required: true},
