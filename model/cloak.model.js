@@ -12,7 +12,7 @@ const capeSchema = new mongoose.Schema({
 });
 
 capeSchema.plugin(autoIncrement.plugin, {
-    model: 'Chest',
+    model: 'Cloak',
     field: 'id',
     startAt: 0,
     incrementBy: 1

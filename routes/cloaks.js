@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     let cloak = new Cloak();
-    cloak.type = "Chest";
+    cloak.type = "Cloack";
     cloak.name = req.body.name;
     cloak.value = req.body.value;
 

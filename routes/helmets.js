@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     let helmet = new Helmet();
-    helmet.type = "Chest";
+    helmet.type = "Helmet";
     helmet.name = req.body.name;
     helmet.value = req.body.value;
 
