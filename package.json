@@ -25,6 +25,7 @@
     "fs": "0.0.1-security",
     "g": "^2.0.1",
     "mongoose": "^5.8.7",
+    "mongoose-auto-increment": "^5.0.1",
     "nodemon": "^2.0.2"
   },
   "devDependencies": {
