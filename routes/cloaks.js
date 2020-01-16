@@ -8,84 +8,61 @@ const Cloak = mongoose.model('Cloak');
 router.get('/', (req, res) => {
     Cloak.find((err, docs) => {
         if (!err) {
-            console.log(docs);
-            docs.forEach(element => {
-                console.log(element.name);
-            });
-            // res.json(docs);
-            res.render("layouts/cloak/list", {
-                list: docs
-            });
+            if (docs.length != 0) {
+                res.status(200);
+                res.send({ 'msg': 'the Cloacks list !', 'success': 'true', 'result': docs });
+            } else {
+                res.status(200);
+                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
+            }
         } else {
-            console.log('Error in retrieving Cloak list: ' + err);
+            res.status(500);
+            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
         }
     });
 
 });
 
 router.post('/add', (req, res) => {
-    console.log("ADD");
-    console.log(req.body._id,req.body._id == '');
-    console.log(req.body.Name);
-    if (req.body._id == '') {
-        insertRecord(req, res);
-    } else {
-        updateRecord(req, res);
-    }
-});
-
-function insertRecord(req, res) {
     let cloak = new Cloak();
-    cloak.id = req.body.Id;
-    cloak.type = req.body.Type;
-    cloak.name = req.body.Name;
-    cloak.value = req.body.Value;
+    cloak.type = "Chest";
+    cloak.name = req.body.name;
+    cloak.value = req.body.value;
 
     cloak.save((err, doc) => {
         if (!err) {
-            res.redirect('/cloaks');
+            res.status(201).send({ 'msg': 'Chest Added !', 'success': 'true', 'result': doc });
         } else {
-            console.log('Error during record insertion Cloak : ' + err);
+            res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
         }
-    });
-}
-
-function updateRecord(req, res) {
-    Cloak.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
-        if(err){
-            console.log('Error during record update : ' + err);
-        }else{
-            res.redirect('/cloaks');
-        }
-    });
-}
-
-router.get('/add', (req, res) => {
-    res.render("layouts/cloak/addOrEdit", {
-        viewTitle: "Add a Cloak"
     });
 });
 
-router.get('/:id', (req, res) => {
-    Cloak.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("layouts/cloak/addOrEdit", {
-                viewTitle: "Update Task",
-                cloak: doc
+router.put('/:id', (req, res) => {
+    Cloak.findOneAndUpdate({id: req.params.id}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+        if (err) {
+            res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
+        } else {
+            res.status(200).send({ 'msg': 'Cloak update !', 'success': 'true', 'result': doc });
+        }
+    });
+});
+
+router.delete('/delete/:id', (req, res) => {
+    Cloak.findOne({id: req.params.id}, function (err, doc) {
+        if(!err){
+            Cloak.findByIdAndDelete(doc._id, (err, doc) => {
+                if (!err) {
+                    res.status(200).send({ 'msg': 'Cloak Deleted !', 'success': 'true', 'result': doc });
+                } else {
+                    res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                }
             });
+        }else{
+            res.status(500).send({ 'msg': 'Error Object not found', 'success': 'false', 'result': err });
         }
     });
-});
 
-router.get('/delete/:id', (req, res) => {
-    Cloak.findByIdAndDelete(req.params.id, (err, doc) => {
-        res.s
-        if (!err) {
-            res.redirect('/cloak/list');
-        } else {
-            console.log('Error in task delete : ' + err);
-        }
-    });
 });
 
 module.exports = router;

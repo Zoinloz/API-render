@@ -8,77 +8,67 @@ const Helmet = mongoose.model('Helmet');
 router.get('/', (req, res) => {
     Helmet.find((err, docs) => {
         if (!err) {
-            // res.status(200);
-            // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
-            res.render("layouts/helmet/list", {
-                list: docs
-            });
+            if (docs.length != 0) {
+                res.status(200);
+                res.send({ 'msg': 'the Helmet list !', 'success': 'true', 'result': docs });
+            } else {
+                res.status(200);
+                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
+            }
         } else {
-            console.log('Error in retrieving helmet list : ' + err);
+            res.status(500);
+            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
         }
     });
 
 });
 
 router.post('/add', (req, res) => {
-    if (req.body._id == '') {
-        insertRecord(req, res);
-    } else {
-        updateRecord(req, res);
-    }
-});
-
-function insertRecord(req, res) {
     let helmet = new Helmet();
-    helmet.id = req.body.Id;
-    helmet.type = req.body.Type;
-    helmet.name = req.body.Name;
-    helmet.value = req.body.Value;
+    helmet.type = "Chest";
+    helmet.name = req.body.name;
+    helmet.value = req.body.value;
 
     helmet.save((err, doc) => {
         if (!err) {
-            res.redirect('/helmets');
+            res.status(201).send({ 'msg': 'Helmet Added !', 'success': 'true', 'result': doc });
         } else {
-            console.log('Error during record insertion helmet : ' + err);
+            res.status(500).send({ 'msg': 'Smothing goes wrong !', 'success': 'false', 'result': err });
         }
-    });
-}
-
-function updateRecord(req, res) {
-    Helmet.findOneAndUpdate( req.body._id , {name: req.body.Name, value: req.body.Value, id:req.body.Id}, function(err, result){
-        if(err){
-            console.log('Error during record update : ' + err);
-        }else{
-            res.redirect('/helmets');
-        }
-    });
-}
-
-router.get('/add', (req, res) => {
-    res.render("layouts/helmet/addOrEdit", {
-        viewTitle: "Add a helmet"
     });
 });
 
-router.get('/:id', (req, res) => {
-    Helmet.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("layouts/helmet/addOrEdit", {
-                viewTitle: "Update helmet",
-                helmet: doc
+// Chest.findById({name: req.params.name}, (err, doc) => {
+//     if (!err) {
+//         res.status(200).send({ 'msg': 'Chest update !', 'success': 'true', 'result': doc });
+//     }
+// });
+
+router.put('/:id', (req, res) => {
+    Helmet.findOneAndUpdate({id: req.params.id}, { name: req.body.name, value: req.body.value }, function (err, doc) {
+        if (err) {
+            res.status(500).send({ 'msg': 'Error during record update !', 'success': 'false', 'result': err });
+        } else {
+            res.status(200).send({ 'msg': 'Helmet update !', 'success': 'true', 'result': doc });
+        }
+    });
+});
+
+router.delete('/delete/:id', (req, res) => {
+    Helmet.findOne({id: req.params.id}, function (err, doc) {
+        if(!err){
+            Helmet.findByIdAndDelete(doc._id, (err, doc) => {
+                if (!err) {
+                    res.status(200).send({ 'msg': 'Helmet Deleted !', 'success': 'true', 'result': doc });
+                } else {
+                    res.status(500).send({ 'msg': 'Error while delete', 'success': 'false', 'result': err });
+                }
             });
+        }else{
+            res.status(500).send({ 'msg': 'Error Object not found', 'success': 'false', 'result': err });
         }
     });
-});
 
-router.get('/delete/:id', (req, res) => {
-    Helmet.findByIdAndDelete(req.params.id, (err, doc) => {
-        if (!err) {
-            res.redirect('/helmets');
-        } else {
-            console.log('Error in helmet delete : ' + err);
-        }
-    });
 });
 
 module.exports = router;
