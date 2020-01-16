@@ -6,11 +6,11 @@ const armorSchema = new mongoose.Schema({
  id: { type: String, required: true, unique: true, trim: true },
  name: { type: String, required: true, unique: true, trim: true },
  composition: {
-   helmet: { type: mongoose.Types.ObjectId, ref: "Helmet" },
-   chest: { type: mongoose.Types.ObjectId, ref: "Chest" },
-   cloak: { type: mongoose.Types.ObjectId, ref: "Cloak" },
-   legs: { type: mongoose.Types.ObjectId, ref: "Legs" },
-   arm: { type: mongoose.Types.ObjectId, ref: "Arm" }
+   helmet: { type: mongoose.Types.ObjectId, ref: "Helmet", required: true},
+   chest: { type: mongoose.Types.ObjectId, ref: "Chest", required: true },
+   cloak: { type: mongoose.Types.ObjectId, ref: "Cloak", required: true },
+   legs: { type: mongoose.Types.ObjectId, ref: "Legs" , required: true},
+   arm: { type: mongoose.Types.ObjectId, ref: "Arm" , required: true}
  }
 
 });

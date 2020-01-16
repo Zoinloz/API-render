@@ -5,7 +5,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Type</label>
-            <input type="text" class="form-control" name="Type" placeholder="Type" value="Armors" readonly required>
+            <input type="text" class="form-control" name="Type" placeholder="Type" value="Armor" readonly required>
         </div>
         <div class="form-group col-md-6">
             <label>ID</label>
@@ -14,11 +14,48 @@
     </div>
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control" name="Name" placeholder="Name your armors" value="{{armor.name}}" required>
+        <input type="text" class="form-control" name="Name" placeholder="Name your armors" value="{{armor.name}}"
+            required>
     </div>
     <div class="form-group">
-        <label>Value </label>
-        <input type="number" class="form-control" name="Value" placeholder="Value of your armors" value="{{armor.value}}" required>
+        <label for="">Choissiez votre bras :</label>
+        <SELECT name="lstArm" size="1">
+            {{#each list1}}
+            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
+            {{/each}}
+        </SELECT>
+    </div>
+    <div class="form-group">
+        <label for="">Choissiez votre Torse :</label>
+        <SELECT name="lstTorse" size="1">
+            {{#each list2}}
+            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
+            {{/each}}
+        </SELECT>
+    </div>
+    <div class="form-group">
+        <label for="">Choissiez votre Cape :</label>
+        <SELECT name="lstCape" size="1">
+            {{#each list3}}
+            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
+            {{/each}}
+        </SELECT>
+    </div>
+    <div class="form-group">
+        <label for="">Choissiez votre Casque :</label>
+        <SELECT name="lstCasque" size="1">
+            {{#each list4}}
+            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
+            {{/each}}
+        </SELECT>
+    </div>
+    <div class="form-group">
+        <label for="">Choissiez vos jambes :</label>
+        <SELECT name="lstLeg" size="1">
+            {{#each list5}}
+            <OPTION name="jambes" value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
+            {{/each}}
+        </SELECT>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>

@@ -4,14 +4,20 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Armor = mongoose.model('Armor');
+const Helmet = mongoose.model('Helmet');
+const Chest = mongoose.model('Chest');
+const Cloak = mongoose.model('Cloak');
+const Arm = mongoose.model('Arm');
+const Leg = mongoose.model('Legs');
 
 router.get('/', (req, res) => {
     Armor.find((err, docs) => {
         if (!err) {
             // res.status(200);
-            // res.send({ 'msg': 'success', 'success': 'true', 'result': docs });
+            // console.log(test);
+            // res.send({ 'msg': 'success', 'success': 'true', 'result': test });
             res.render("layouts/armor/list", {
-                list: docs
+                list: docs,
             });
         } else {
             console.log('Error in retrieving arm list : ' + err);
@@ -29,11 +35,14 @@ router.post('/add', (req, res) => {
 });
 
 function insertRecord(req, res) {
-    let armor = new Armor();
     armor.id = req.body.Id;
     armor.type = req.body.Type;
     armor.name = req.body.Name;
-    armor.value = req.body.Value;
+    armor.composition.helmet = req.body.lstCasque;
+    armor.composition.cloak = req.body.lstCape;
+    armor.composition.legs = req.body.lstLeg;
+    armor.composition.chest = req.body.lstTorse;
+    armor.composition.arm = req.body.lstArm;
 
     armor.save((err, doc) => {
         if (!err) {
@@ -55,8 +64,33 @@ function updateRecord(req, res) {
 }
 
 router.get('/add', (req, res) => {
-    res.render("layouts/armor/addOrEdit", {
-        viewTitle: "Add a armor"
+    var monChest;
+    var maCloak;
+    var monHelmet;
+    var monLeg;
+    Chest.find((err, docs) => {
+        monChest = docs;
+    });
+    Cloak.find((err, docs) => {
+        maCloak = docs;
+    });
+    Helmet.find((err, docs) => {
+        monHelmet = docs;
+    });
+    Leg.find((err, docs) => {
+        monLeg = docs;
+    });
+    Arm.find((err, docs) => {
+        if (!err) {
+        res.render("layouts/armor/addOrEdit", {
+            viewTitle: "Add a armor",
+            list1: docs,
+            list2: monChest,
+            list3: maCloak,
+            list4: monHelmet,
+            list5: monLeg
+        });
+    }
     });
 });
 

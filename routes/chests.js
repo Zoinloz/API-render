@@ -71,7 +71,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.get('/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     Chest.findByIdAndDelete(req.params.id, (err, doc) => {
         if (!err) {
             res.redirect('/chests');
