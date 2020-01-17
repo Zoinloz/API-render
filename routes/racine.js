@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.render("layouts/racine/racine", {
-        viewTitle: "Insert Project"
+        viewTitle: "Read.ME"
     });
 });
 
