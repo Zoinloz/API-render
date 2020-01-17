@@ -26,7 +26,7 @@ app.set('views' , path.join(__dirname, '/views/'));
 app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
 app.set('view engine', 'hbs');
 
-//Création du serveur Web
+//Creation server localhost
 app.listen(3000, () => {
 	console.log('Express server started on port 3000');
 })

@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function (req,res){
-    res.json('Hello world');
+router.get('/', (req, res) => {
+    res.render("layouts/racine/racine", {
+        viewTitle: "Insert Project"
+    });
 });
 
 
