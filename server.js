@@ -23,7 +23,7 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 app.set('views' , path.join(__dirname, '/views/'));
-app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
+app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'racine', layoutsDir: __dirname + '/views/layouts/racine' }));
 app.set('view engine', 'hbs');
 
 //Creation server localhost
