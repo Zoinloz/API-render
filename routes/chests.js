@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
             if (docs.length != 0) {
                 res.status(200);
                 res.send({ 'msg': 'the Chests list !', 'success': 'true', 'result': docs });
+               
             } else {
                 res.status(200);
                 res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });

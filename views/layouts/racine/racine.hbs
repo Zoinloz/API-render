@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-    <title>
-        {{viewTitle}}
-    </title>
+    <h3>{{viewTitle}}</h3>
+    <title>API project</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="row">
-        <div class="col-md-6 offset-md-3" style="background-color:white; margin-top:25px; padding:20px;">
-            Commandes : <br>
-            list of chests -> /chests<br>
-            list of helmets -> /helmets ...
-
-        </div>
+<form method="GET">
+<Label>Choose your list : </Label>
+    <div class="form-group">
+         <a class="btn btn-secondary" href="/helmets">Go to Helmets list</a>
+         <a class="btn btn-secondary" href="/chests">Go to Chests list</a>
+         <a class="btn btn-secondary" href="/cloaks">Go to Cloaks list</a>
+         <a class="btn btn-secondary" href="/arms">Go to Arms list</a>
+         <a class="btn btn-secondary" href="/legs">Go to Legs list</a>
     </div>
-</body>
+   
+</form>
+
+
+<script src="/socket.io/socket.js"></script>
 
 </html>

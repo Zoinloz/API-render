@@ -27,8 +27,8 @@ app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'racine', layoutsDir:
 app.set('view engine', 'hbs');
 
 //Creation server localhost
-app.listen(3000, () => {
-	console.log('Express server started on port 3000');
+app.listen(3001, () => {
+	console.log('Express server started on port 3001');
 })
 
 //Configure routes
