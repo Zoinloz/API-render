@@ -1,6 +1,5 @@
 'use strict';
 
-require('./mongo'); //Connection to MongoDB
 //Imports
 const express = require('express');
 const path = require('path'); //adapte le chemin en fonction de l'os
@@ -23,12 +22,12 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 app.set('views' , path.join(__dirname, '/views/'));
-app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'racine', layoutsDir: __dirname + '/views/layouts/racine' }));
+app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
 app.set('view engine', 'hbs');
 
 //Creation server localhost
-app.listen(3000, () => {
-	console.log('Express server started on port 3000');
+app.listen(3001, () => {
+	console.log('Express server started on port 3001');
 })
 
 //Configure routes
@@ -37,6 +36,6 @@ app.use('/Arms', Arms);
 app.use('/Cloaks', Cloaks);
 app.use('/Helmets', Helmets);
 app.use('/Legs', Legs);
-app.use('/Chests', Chests); // Armure pour se protéger le torse
+app.use('/Chests', Chests);
 app.use('/Armors', Armors);
 

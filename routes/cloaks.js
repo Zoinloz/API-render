@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Cloak = mongoose.model('Cloak');
+// const mongoose = require('mongoose');
+// const Cloak = mongoose.model('Cloak');
 
 router.get('/', (req, res) => {
     Cloak.find((err, docs) => {

@@ -3,28 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Armor = mongoose.model('Armor');
-const Helmet = mongoose.model('Helmet');
-const Chest = mongoose.model('Chest');
-const Cloak = mongoose.model('Cloak');
-const Arm = mongoose.model('Arm');
-const Leg = mongoose.model('Legs');
+// const Armor = mongoose.model('Armor');
+// const Helmet = mongoose.model('Helmet');
+// const Chest = mongoose.model('Chest');
+// const Cloak = mongoose.model('Cloak');
+// const Arm = mongoose.model('Arm');
+// const Leg = mongoose.model('Legs');
 
 router.get('/', (req, res) => {
-    Armor.find((err, docs) => {
-        if (!err) {
-            if (docs.length != 0) {
-                res.status(200);
-                res.send({ 'msg': 'the Armors list !', 'success': 'true', 'result': docs });
-            } else {
-                res.status(200);
-                res.send({ 'msg': 'No data !', 'success': 'true', 'result': docs });
-            }
-        } else {
-            res.status(500);
-            res.send({ 'msg': 'Something goes wrong !', 'success': 'false', 'result': err });
-        }
-    });
+    
 });
 
 //Get one Armor with the name   url: http://localhost:3000/armors/<name>   Method : GET

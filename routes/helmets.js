@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Helmet = mongoose.model('Helmet');
+// const mongoose = require('mongoose');
+// const Helmet = mongoose.model('Helmet');
 
 router.get('/', (req, res) => {
     Helmet.find((err, docs) => {

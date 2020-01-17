@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Legs = mongoose.model('Legs');
+// const mongoose = require('mongoose');
+// const Legs = mongoose.model('Legs');
 
 router.get('/', (req, res) => {
     Legs.find((err, docs) => {
