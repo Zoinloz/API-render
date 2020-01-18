@@ -2,10 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-// const Chest = mongoose.model('Chest');//Get the Chest model
 const http = require('http');
-
-//Parameters of the request
 
 //Show table result of the Chest list with result request
 //Call API Armor
@@ -33,31 +30,34 @@ router.get('/list', (req, res) => {
     }).end();
 });
 
+
 router.post('/', (req, res) => {
-    console.log(req.body.Name);
+    console.log(req.body);
     const optionsPost = {
         host: 'localhost',
         port: 3000,
-        path: '/chests/add?name=' + req.body.Name + '&value=' + req.body.Value,
+        path: '/chests/add'+req.body.Name+'&'+req.body.Value,
         method: 'POST'
     };
+    console.log('PATHHH',optionsPost)
     http.request(optionsPost, function (result) {
         console.log('STATUS: ' + result.statusCode);
         console.log('HEADERS: ' + JSON.stringify(result.headers));
         result.setEncoding('utf8');
         result.on('data', function (chunk) {
             console.log(JSON.parse(chunk));
-            res.render("layouts/chest/list", {
+            res.render("layouts/chest/info", {
+                viewTitle: 'Result of Add chest',
                 statut: result.statusCode,
                 success: JSON.parse(chunk).success,
                 message: JSON.parse(chunk).msg,
-                list: JSON.parse(chunk).result,
+                chest: JSON.parse(chunk).result,
             });
         });
     }).end();
 });
 
-
+//Render the view to add chest
 router.get('/add', (req, res) => {
     res.render("layouts/chest/addOrEdit", {
         viewTitle: "Insert Chest",
@@ -67,6 +67,7 @@ router.get('/add', (req, res) => {
     });
 });
 
+//Render view to Update a chest, param is ObjectId
 router.get('/:id', (req, res) => {
     const optionsGetById = {
         host: 'localhost',
@@ -81,6 +82,30 @@ router.get('/:id', (req, res) => {
         result.on('data', function (chunk) {
             res.render("layouts/chest/addOrEdit", {
                 viewTitle: 'Update Chest',
+                statut: result.statusCode,
+                success: JSON.parse(chunk).success,
+                message: JSON.parse(chunk).msg,
+                chest: JSON.parse(chunk).result,
+            });
+        });
+    }).end();
+});
+
+//Delete Chest by ObjectID
+router.get('/delete/:id', (req, res) => {
+    const optionsGetById = {
+        host: 'localhost',
+        port: 3000,
+        path: '/chests/'+req.params.id,
+        method: 'DELETE'
+    };
+    console.log('PATH',optionsGetById.path);
+    //Parameters of the request
+    http.request(optionsGetById, function (result) {
+        result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            res.render("layouts/chest/info", {
+                viewTitle: 'Info from the Deleted chest',
                 statut: result.statusCode,
                 success: JSON.parse(chunk).success,
                 message: JSON.parse(chunk).msg,
