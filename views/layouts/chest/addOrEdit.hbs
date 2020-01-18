@@ -1,5 +1,7 @@
 <h3>{{viewTitle}}</h3>
 
+<label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+<label>Message Result : {{this.message}}</label>
 <form action="/chests" method="POST">
     <input type="hidden" name="_id" value="{{chest._id}}">
     <div class="form-row">
@@ -10,7 +12,7 @@
         </div>
         <div class="form-group col-md-6">
             <label>ID</label>
-            <input type="number" class="form-control" name="Id" placeholder="ID" value="{{chest.id}}">
+            <input type="number" class="form-control" name="Id" placeholder="ID" value="{{chest.id}}" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -23,7 +25,7 @@
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>
-        <a class="btn btn-secondary" href="/chests">View All</a>
+        <a class="btn btn-secondary" href="/chests/list">View All</a>
     </div>
 </form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
