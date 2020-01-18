@@ -30,7 +30,7 @@ router.get('/list', (req, res) => {
     }).end();
 });
 
-
+//call Api to Add a Chest by the View
 router.post('/', (req, res) => {
     console.log(req.body);
     const optionsPost = {
@@ -56,6 +56,9 @@ router.post('/', (req, res) => {
         });
     }).end();
 });
+router.post('', (req, res) => {
+    
+});
 
 //Render the view to add chest
 router.get('/add', (req, res) => {
@@ -67,20 +70,20 @@ router.get('/add', (req, res) => {
     });
 });
 
-//Render view to Update a chest, param is ObjectId
+//Render view to Update a chest, param is ObjectId and Name and Value
 router.get('/:id', (req, res) => {
     const optionsGetById = {
         host: 'localhost',
         port: 3000,
-        path: '/chests/'+req.params.id,
-        method: 'GET'
+        path: '/chests/'+req.params.id+'&'+req.body.Name+'&'+req.body.Value,
+        method: 'PUT'
     };
-    console.log('PATH',optionsGetById.path);
+    console.log('PATH',optionsGetById);
     //Parameters of the request
     http.request(optionsGetById, function (result) {
         result.setEncoding('utf8');
         result.on('data', function (chunk) {
-            res.render("layouts/chest/addOrEdit", {
+            res.render("layouts/chest/list", {
                 viewTitle: 'Update Chest',
                 statut: result.statusCode,
                 success: JSON.parse(chunk).success,
