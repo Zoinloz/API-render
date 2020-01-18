@@ -1,0 +1,33 @@
+<h3>{{viewTitle}}</h3>
+
+
+<div>
+    <label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+</div>
+<div>
+    <label>Message Result : {{this.message}}</label>
+</div>
+<div>
+    <label>ObjectId</label>
+    <input type="text" class="form-control" name="_id" value="{{helmet._id}}" readonly>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Type</label>
+            <input type="text" class="form-control" name="Type" value="Helmet" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label>ID</label>
+            <input type="number" class="form-control" name="Id" placeholder="ID" value="{{helmet.id}}" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="Name your helmets" value="{{helmet.name}}" readonly>
+    </div>
+    <div class="form-group">
+        <label>Value </label>
+        <input type="number" class="form-control" name="Value" placeholder="Value of your helmets" value="{{helmet.value}}" readonly>
+    </div>
+</div>
+<a class="btn btn-primary" href="/helmets/list">Return to the List of Chest</a>
+<a class="btn btn-secondary" href="/">Return to the Project</a>
