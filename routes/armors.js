@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 // const Armor = mongoose.model('Armor');
 // const Helmet = mongoose.model('Helmet');
 // const Chest = mongoose.model('Chest');
