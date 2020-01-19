@@ -2,7 +2,6 @@
 
 <label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
 <label>Message Result : {{this.message}}</label>
-<form action="/armors/add" method="POST">
     <input type="hidden" name="_id" value="{{armor._id}}">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -24,20 +23,20 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Chest" value="{{armor.composition.chest}}" readonly
+                <input type="text" class="form-control" id="Chest" name="Chest" value="{{armor.composition.chest}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
                 <label>ID</label>
-                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+                <input type="text" class="form-control" id="ChestId" name="ChestId" value="{{chest.id}}" readonly required>
             </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
-                <input type="text" class="form-control" name="ChestName" value="{{chest.name}}" readonly required>
+                <input type="text" class="form-control" id="ChestName" name="ChestName" value="{{chest.name}}" readonly required>
             </div>
             <div class="form-group col-md-2">
                 <label>Value</label>
-                <input type="text" class="form-control" name="ChestValue" value="{{chest.value}}" readonly required>
+                <input type="text" class="form-control" id="ChestValue" name="ChestValue" value="{{chest.value}}" readonly required>
             </div>
         </div>
         <div class="container-fluid">
@@ -57,14 +56,14 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <button onclick="myFunction()">Click me</button>
+                                <button onclick="myFunctionChest({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td>{{this.id}}</td>
-                        <td>{{this.type}}</td>
-                        <td class="nameChest">{{this.name}}</td>
-                        <td>{{this.value}}</td>
-                        <td>{{this._id}}</td>
+                        <td id="tdId{{this.id}}">{{this.id}}</td>
+                        <td id="tdType{{this.id}}">{{this.type}}</td>
+                        <td id="tdName{{this.id}}">{{this.name}}</td>
+                        <td id="tdValue{{this.id}}">{{this.value}}</td>
+                        <td id="tdID{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -283,11 +282,18 @@
         <button type="submit" class="btn btn-info">Envoyer</button>
         <a class="btn btn-secondary" href="/armors/list">View All</a>
     </div>
-</form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
 
 <script type="text/javascript">
-    function myFunction() {
-        document.getElementById('nameChest').readOnly = true;
+    function myFunctionChest(pId) {
+        var myName = document.getElementById('ChestName');
+        var myObjectID = document.getElementById('Chest');
+        var myValue = document.getElementById('ChestValue')
+        var myId = document.getElementById('ChestId');
+        myName.value = document.getElementById('tdName'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdID'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValue'+pId).innerHTML;
+        myId.value = document.getElementById('tdId'+pId).innerHTML;
+        alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
     }
 </script>
