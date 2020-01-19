@@ -1,15 +1,17 @@
 <h3>{{viewTitle}}</h3>
 
+<label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+<label>Message Result : {{this.message}}</label>
 <form action="/armors/add" method="POST">
     <input type="hidden" name="_id" value="{{armor._id}}">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Type</label>
-            <input type="text" class="form-control" name="Type" placeholder="Type" value="Armor" readonly required>
+            <input type="text" class="form-control" name="Type" value="Armor" readonly required>
         </div>
         <div class="form-group col-md-6">
             <label>ID</label>
-            <input type="number" class="form-control" name="Id" placeholder="ID" value="1">
+            <input type="number" class="form-control" name="Id" placeholder="ID" value="{{armor.id}}" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -18,48 +20,112 @@
             required>
     </div>
     <div class="form-group">
-        <label for="">Choissiez votre bras :</label>
-        <SELECT name="lstArm" size="1">
-            {{#each list1}}
-            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
-            {{/each}}
-        </SELECT>
+        <h4>Chest selected</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>ObjectID</label>
+                <input type="text" class="form-control" name="Chest" value="{{armor.composition.chest}}" readonly
+                    required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>ID</label>
+                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" name="ChestName" value="{{chest.name}}" readonly required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Value</label>
+                <input type="text" class="form-control" name="ChestValue" value="{{chest.value}}" readonly required>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each chests}}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label><input type="radio" id='regular' name="optradio"></label>
+                            </div>
+                        </td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.type}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.value}}</td>
+                        <td>{{this._id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="form-group">
-        <label for="">Choissiez votre Torse :</label>
-        <SELECT name="lstTorse" size="1">
-            {{#each list2}}
-            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
-            {{/each}}
-        </SELECT>
-    </div>
-    <div class="form-group">
-        <label for="">Choissiez votre Cape :</label>
-        <SELECT name="lstCape" size="1">
-            {{#each list3}}
-            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
-            {{/each}}
-        </SELECT>
-    </div>
-    <div class="form-group">
-        <label for="">Choissiez votre Casque :</label>
-        <SELECT name="lstCasque" size="1">
-            {{#each list4}}
-            <OPTION value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
-            {{/each}}
-        </SELECT>
-    </div>
-    <div class="form-group">
-        <label for="">Choissiez vos jambes :</label>
-        <SELECT name="lstLeg" size="1">
-            {{#each list5}}
-            <OPTION name="jambes" value="{{this._id}}">{{this.name}} {{this.value}}</OPTION>
-            {{/each}}
-        </SELECT>
+        <h4>Helmet selected</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>ObjectID</label>
+                <input type="text" class="form-control" name="Chest" value="{{armor.composition.helmet}}" readonly
+                    required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Value</label>
+                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each helmets}}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label><input type="radio" id='regular' name="optradio"></label>
+                            </div>
+                        </td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.type}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.value}}</td>
+                        <td>{{this._id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>
-        <a class="btn btn-secondary" href="/armors">View All</a>
+        <a class="btn btn-secondary" href="/armors/list">View All</a>
     </div>
 </form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
+
+<script>
+
+</script>

@@ -21,8 +21,21 @@ app.use(bodyparser.urlencoded({
 	extended: true
 }));
 app.use(bodyparser.json());
-app.set('views' , path.join(__dirname, '/views/'));
-app.engine('hbs' , exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
+app.set('views', path.join(__dirname, '/views/'));
+app.engine('handlebars', exphbs({
+	helpers: {
+		// Function to do compair 2 value
+		contains: function (lvalue, rvalue) {
+			if (lvalue === rvalue) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+}));
+app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts' }));
+
 app.set('view engine', 'hbs');
 
 //Creation server localhost

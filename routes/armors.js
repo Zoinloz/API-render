@@ -31,56 +31,80 @@ router.get('/list', (req, res) => {
 });
 
 //Get one Armor with the name   url: http://localhost:3000/armors/<name>   Method : GET
-router.get('/:name', (req, res) => {
-    Armor.findOne({ name: req.params.name }, (err, doc) => {
-        if (!err && doc != null) {
-            res.status(200).send({ 'msg': 'Armor found !', 'success': 'true', 'result': doc });
-        } else {
-            res.status(500).send({ 'msg': 'Armor not found', 'success': 'false', 'result': err });
-        }
-    });
+router.get('/:id', (req, res) => {
+    var allChest;
+    var allHelmet;
+    const optionsGetChest = {
+        host: 'localhost',
+        port: 3000,
+        path: '/chests',
+        method: 'GET'
+    };
+    //Parameters of the request
+    http.request(optionsGetChest, function (result) {
+        // console.log('STATUS: ' + result.statusCode);
+        // console.log('HEADERS: ' + JSON.stringify(result.headers));
+        // result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            allChest = JSON.parse(chunk).result;
+        });
+    }).end();
+    const optionsGetHelmet = {
+        host: 'localhost',
+        port: 3000,
+        path: '/helmets',
+        method: 'GET'
+    };
+    //Parameters of the request
+    http.request(optionsGetHelmet, function (result) {
+        // console.log('STATUS: ' + result.statusCode);
+        // console.log('HEADERS: ' + JSON.stringify(result.headers));
+        // result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            allHelmet = JSON.parse(chunk).result;
+        });
+    }).end();
+
+    console.log('Get to show',req.params);
+    const optionsGetById = {
+        host: 'localhost',
+        port: 3000,
+        path: '/armors/'+req.params.id,
+        method: 'GET'
+    };
+    console.log('PATH',optionsGetById);
+    console.log('allChest',allChest)
+    //Parameters of the request
+    http.request(optionsGetById, function (result) {
+        result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            console.log('ARMOR data',JSON.parse(chunk))
+            res.render("layouts/armor/addOrEdit", {
+                viewTitle: 'Update Armor',
+                statut: result.statusCode,
+                success: JSON.parse(chunk).success,
+                message: JSON.parse(chunk).msg,
+                armor: JSON.parse(chunk).result,
+                chests: allChest,
+                helmets: allHelmet
+            });
+        });
+    }).end();
 });
 
 router.post('/add', (req, res) => {
+    console.log('ROUTERRRRR',req.body);
+    if (req.body._id == '') {
         insertRecord(req, res);
+    } else {
+        updateRecord(req, res);
+    }
 });
 
 function insertRecord(req, res) {
     console.log(req.body);
-    const armor = new Armor();
-    const monTab = new Array();
-    var monChest ;
-    var maCloak;
-    var monHelmet;
-    var monLeg;
-    var myArm;
-    
-    Chest.findOne({id: req.body.idChest}, (err, doc) => {
-        monChest = doc;
-    });
-    console.log('leChest ',monChest);
-    Cloak.findOne({id: req.body.idCloak }, (err, doc) => {
-        maCloak = doc;
-    });
-    Helmet.findOne({id: req.body.idHelmet }, (err, doc) => {
-        monHelmet = doc;
-    });
-    Leg.findOne({id: req.body.idLegs }, (err, doc) => {
-        monLeg = doc;
-    });
-    Arm.findOne({id: req.body.idArms }, (err, doc) => {
-        myArm = doc;
-    });
-
-    armor.id = req.body.Id;
-    armor.type = req.body.Type;
-    armor.name = req.body.Name;
-    armor.composition.helmet = monHelmet._id;
-    armor.composition.cloak = maCloak._id;
-    armor.composition.legs = monLeg._id;
-    armor.composition.chest = monChest._id;
-    armor.composition.arm = myArm._id;
-
     armor.save((err, doc) => {
         if (!err) {
             res.status(201).send({ 'msg': 'Armor Added !', 'success': 'true', 'result': doc });
@@ -101,7 +125,6 @@ function updateRecord(req, res) {
 }
 
 router.get('/add', (req, res) => {
-
     Arm.find((err, docs) => {
         if (!err) {
             res.render("layouts/armor/addOrEdit", {
