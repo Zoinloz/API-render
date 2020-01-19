@@ -2,6 +2,7 @@
 
 <label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
 <label>Message Result : {{this.message}}</label>
+<form action="/armors/add" method="POST"></form>
     <input type="hidden" name="_id" value="{{armor._id}}">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -127,7 +128,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" id="Arm" name="Arm" value="{{arm.composition.arm}}" readonly
+                <input type="text" class="form-control" id="Arm" name="Arm" value="{{armor.composition.arm}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
@@ -179,20 +180,20 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Chest" value="{{armor.composition.legs}}" readonly
+                <input type="text" class="form-control" name="Legs" value="{{armor.composition.legs}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
                 <label>ID</label>
-                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+                <input type="text" class="form-control" id="LegsId" name="LegsId" value="{{legs.id}}" readonly required>
             </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
-                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+                <input type="text" class="form-control" id="LegsName" name="LegsName" value="{{legs.name}}" readonly required>
             </div>
             <div class="form-group col-md-2">
                 <label>Value</label>
-                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+                <input type="text" class="form-control" id="LegsValue" name="LegsValue" value="{{legs.value}}" readonly required>
             </div>
         </div>
         <div class="container-fluid">
@@ -212,14 +213,14 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <label><input type="radio" id='regular' name="optradio"></label>
+                                <button onclick="myFunctionLegs({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td>{{this.id}}</td>
-                        <td>{{this.type}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.value}}</td>
-                        <td>{{this._id}}</td>
+                        <td id="tdIdLegs{{this.id}}">{{this.id}}</td>
+                        <td id="tdTypeLegs{{this.id}}">{{this.type}}</td>
+                        <td id="tdNameLegs{{this.id}}">{{this.name}}</td>
+                        <td id="tdValueLegs{{this.id}}">{{this.value}}</td>
+                        <td id="tdIDLegs{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -278,7 +279,7 @@
             </table>
         </div>
     </div>
-    <form action="/armors/add" method="POST">
+    
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>
         <a class="btn btn-secondary" href="/armors/list">View All</a>
@@ -298,6 +299,7 @@
         myId.value = document.getElementById('tdIdChest'+pId).innerHTML;
         //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
     }
+
       function myFunctionHelmet(pId) {
         var myName = document.getElementById('HelmetName');
         var myObjectID = document.getElementById('Helmet');
@@ -319,6 +321,18 @@
         myObjectID.value = document.getElementById('tdIDArm'+pId).innerHTML;
         myValue.value = document.getElementById('tdValueArm'+pId).innerHTML;
         myId.value = document.getElementById('tdIdArm'+pId).innerHTML;
+        //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
+    }
+
+      function myFunctionLegs(pId) {
+        var myName = document.getElementById('LegsName');
+        var myObjectID = document.getElementById('Legs');
+        var myValue = document.getElementById('LegsValue')
+        var myId = document.getElementById('LegsId');
+        myName.value = document.getElementById('tdNameLegs'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdIDLegs'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValueLegs'+pId).innerHTML;
+        myId.value = document.getElementById('tdIdLegs'+pId).innerHTML;
         //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
     }
 </script>
