@@ -40,7 +40,6 @@ router.post('/', (req, res) => {
 });
 
 function insertRecord(req, res) {
-    console.log('')
     const optionPost = {
         host: 'localhost',
         port: 3000,
@@ -64,7 +63,26 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-
+    const optionPost = {
+        host: 'localhost',
+        port: 3000,
+        path: '/armors/'+req.body.Id+'&'+req.body.Name+'&'+req.body.Helmet+'&'+req.body.Chest+'&'+req.body.Arm+'&'+req.body.Legs+'&'+req.body.Cloak,
+        method: 'PUT'
+    };
+    console.log('PATH cREATe ',optionPost.path);
+    //Parameters of the request
+    http.request(optionPost, function (result) {
+        result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            console.log('ARMOR data',JSON.parse(chunk))
+            res.render("layouts/armor/addOrEdit", {
+                viewTitle: 'Update Armor',
+                statut: result.statusCode,
+                success: JSON.parse(chunk).success,
+                message: JSON.parse(chunk).msg
+            });
+        });
+    }).end();
 }
 
 router.get('/add', (req, res) => {
