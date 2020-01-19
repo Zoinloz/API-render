@@ -1,27 +1,38 @@
 <h3>Armors List <a class="btn btn-secondary" href="/armors/add">Create a Armor +</a></h3>
 
-<a class="btn btn-primary" href="/">Return to the Project</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Compo</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each list}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.composition.helmet}}</td>
-            <td>
-                <a href="/armors/{{this._id}}" aria-hidden="true"></a>
-                <a href="/armors/{{this._id}}">Update</a>
-                <a href="/armors/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+<label>Message Result : {{this.message}}</label>
+<div class="container-fluid">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Helmet</th>
+                <th scope="col">Chest</th>
+                <th scope="col">Arms</th>
+                <th scope="col">Legs</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each list}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.composition.helmet}}</td>
+                <td>{{this.composition.chest}}</td>
+                <td>{{this.composition.arm}}</td>
+                <td>{{this.composition.legs}}</td>
+                <td>
+                    <a href="/armors/{{this._id}}" aria-hidden="true"></a>
+                    <a href="/armors/{{this._id}}">Update</a>
+                    <a href="/armors/delete/{{this._id}}"
+                        onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/">Return to the Project</a>
+</div>

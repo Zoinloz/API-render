@@ -3,7 +3,7 @@
 
 <head>
     <h3>{{viewTitle}}</h3>
-    <title>API project</title>
+    <title>View from the API</title>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,17 +12,32 @@
 </head>
 
 <form method="GET">
-<Label>Choose your list : </Label>
-    <div class="form-group">
-         <a class="btn btn-secondary" href="/Helmets/list">Go to Helmets list</a>
-         <a class="btn btn-secondary" href="/Chests/list">Go to Chests list</a>
-         <a class="btn btn-secondary" href="/Cloaks/list">Go to Cloaks list</a>
-         <a class="btn btn-secondary" href="/Arms/list">Go to Arms list</a>
-         <a class="btn btn-secondary" href="/Legs/list">Go to Legs list</a>
-    </div>
-   
-</form>
+    <Label>Choose your list : </Label>
+    <div class="form-row">
+        <div class="form-group">
+            <a class="btn btn-outline-primary" href="/Helmets/list">Go to Helmets list</a>
+        </div>
 
+        <div class="form-group">
+            <a class="btn btn-outline-primary" href="/Chests/list">Go to Chests list</a>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-outline-primary" href="/Cloaks/list">Go to Cloaks list</a>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-outline-primary" href="/Arms/list">Go to Arms list</a>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-outline-primary" href="/Legs/list">Go to Legs list</a>
+        </div>
+    </div>
+</form>
+<div class="form-group">
+    <a class="btn btn-primary btn-lg btn-block" href="/armors/list">All Armors create HERE !</a>
+</div>
 
 <script src="/socket.io/socket.js"></script>
 

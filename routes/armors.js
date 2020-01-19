@@ -2,15 +2,32 @@
 
 const express = require('express');
 const router = express.Router();
-// const Armor = mongoose.model('Armor');
-// const Helmet = mongoose.model('Helmet');
-// const Chest = mongoose.model('Chest');
-// const Cloak = mongoose.model('Cloak');
-// const Arm = mongoose.model('Arm');
-// const Leg = mongoose.model('Legs');
+const http = require('http');
 
-router.get('/', (req, res) => {
-    
+//Show table result of the Chest list with result request
+//Call API Armor
+router.get('/list', (req, res) => {
+    const optionsGet = {
+        host: 'localhost',
+        port: 3000,
+        path: '/armors',
+        method: 'GET'
+    };
+    //Parameters of the request
+    http.request(optionsGet, function (result) {
+        // console.log('STATUS: ' + result.statusCode);
+        // console.log('HEADERS: ' + JSON.stringify(result.headers));
+        // result.setEncoding('utf8');
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            res.render("layouts/armor/list", {
+                statut: result.statusCode,
+                success: JSON.parse(chunk).success,
+                message: JSON.parse(chunk).msg,
+                list: JSON.parse(chunk).result,
+            });
+        });
+    }).end();
 });
 
 //Get one Armor with the name   url: http://localhost:3000/armors/<name>   Method : GET
