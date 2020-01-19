@@ -59,11 +59,11 @@
                                 <button onclick="myFunctionChest({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td id="tdId{{this.id}}">{{this.id}}</td>
-                        <td id="tdType{{this.id}}">{{this.type}}</td>
-                        <td id="tdName{{this.id}}">{{this.name}}</td>
-                        <td id="tdValue{{this.id}}">{{this.value}}</td>
-                        <td id="tdID{{this.id}}">{{this._id}}</td>
+                        <td id="tdIdChest{{this.id}}">{{this.id}}</td>
+                        <td id="tdTypeChest{{this.id}}">{{this.type}}</td>
+                        <td id="tdNameChest{{this.id}}">{{this.name}}</td>
+                        <td id="tdValueChest{{this.id}}">{{this.value}}</td>
+                        <td id="tdIDChest{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -75,20 +75,20 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Chest" value="{{armor.composition.helmet}}" readonly
+                <input type="text" class="form-control" id="Helmet" name="Helmet" value="{{armor.composition.helmet}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
                 <label>ID</label>
-                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+                <input type="text" class="form-control" id="HelmetId" name="HelmetId" value="{{helmet.id}}" readonly required>
             </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
-                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+                <input type="text" class="form-control" id="HelmetName" name="HelmetName" value="{{helmet.name}}" readonly required>
             </div>
             <div class="form-group col-md-2">
                 <label>Value</label>
-                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+                <input type="text" class="form-control" id="HelmetValue" name="HelmetValue" value="{{helmet.value}}" readonly required>
             </div>
         </div>
         <div class="container-fluid">
@@ -103,19 +103,19 @@
                         <th>#</th>
                     </tr>
                 </thead>
-                <tbody>
+               <tbody>
                     {{#each helmets}}
                     <tr>
                         <td>
                             <div class="radio">
-                                <label><input type="radio" id='regular' name="optradio"></label>
+                                <button onclick="myFunctionHelmet({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td>{{this.id}}</td>
-                        <td>{{this.type}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.value}}</td>
-                        <td>{{this._id}}</td>
+                        <td id="tdIdHelmet{{this.id}}">{{this.id}}</td>
+                        <td id="tdTypeHelmet{{this.id}}">{{this.type}}</td>
+                        <td id="tdNameHelmet{{this.id}}">{{this.name}}</td>
+                        <td id="tdValueHelmet{{this.id}}">{{this.value}}</td>
+                        <td id="tdIDHelmet{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -127,20 +127,20 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Chest" value="{{armor.composition.arm}}" readonly
+                <input type="text" class="form-control" id="Arm" name="Arm" value="{{arm.composition.arm}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
                 <label>ID</label>
-                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+                <input type="text" class="form-control" id="ArmId" name="ArmId" value="{{arm.id}}" readonly required>
             </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
-                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+                <input type="text" class="form-control" id="ArmName" name="ArmName" value="{{arm.name}}" readonly required>
             </div>
             <div class="form-group col-md-2">
                 <label>Value</label>
-                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+                <input type="text" class="form-control" id="ArmValue" name="ArmValue" value="{{arm.value}}" readonly required>
             </div>
         </div>
         <div class="container-fluid">
@@ -160,14 +160,14 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <label><input type="radio" id='regular' name="optradio"></label>
+                                <button onclick="myFunctionArm({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td>{{this.id}}</td>
-                        <td>{{this.type}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.value}}</td>
-                        <td>{{this._id}}</td>
+                        <td id="tdIdArm{{this.id}}">{{this.id}}</td>
+                        <td id="tdTypeArm{{this.id}}">{{this.type}}</td>
+                        <td id="tdNameArm{{this.id}}">{{this.name}}</td>
+                        <td id="tdValueArm{{this.id}}">{{this.value}}</td>
+                        <td id="tdIDArm{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -278,10 +278,12 @@
             </table>
         </div>
     </div>
+    <form action="/armors/add" method="POST">
     <div class="form-group">
         <button type="submit" class="btn btn-info">Envoyer</button>
         <a class="btn btn-secondary" href="/armors/list">View All</a>
     </div>
+    </form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
 
 <script type="text/javascript">
@@ -290,10 +292,33 @@
         var myObjectID = document.getElementById('Chest');
         var myValue = document.getElementById('ChestValue')
         var myId = document.getElementById('ChestId');
-        myName.value = document.getElementById('tdName'+pId).innerHTML;
-        myObjectID.value = document.getElementById('tdID'+pId).innerHTML;
-        myValue.value = document.getElementById('tdValue'+pId).innerHTML;
-        myId.value = document.getElementById('tdId'+pId).innerHTML;
-        alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
+        myName.value = document.getElementById('tdNameChest'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdIDChest'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValueChest'+pId).innerHTML;
+        myId.value = document.getElementById('tdIdChest'+pId).innerHTML;
+        //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
+    }
+      function myFunctionHelmet(pId) {
+        var myName = document.getElementById('HelmetName');
+        var myObjectID = document.getElementById('Helmet');
+        var myValue = document.getElementById('HelmetValue')
+        var myId = document.getElementById('HelmetId');
+        myName.value = document.getElementById('tdNameHelmet'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdIDHelmet'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValueHelmet'+pId).innerHTML;
+        myId.value = document.getElementById('tdIdHelmet'+pId).innerHTML;
+        //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
+    }
+
+      function myFunctionArm(pId) {
+        var myName = document.getElementById('ArmName');
+        var myObjectID = document.getElementById('Arm');
+        var myValue = document.getElementById('ArmValue')
+        var myId = document.getElementById('ArmId');
+        myName.value = document.getElementById('tdNameArm'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdIDArm'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValueArm'+pId).innerHTML;
+        myId.value = document.getElementById('tdIdArm'+pId).innerHTML;
+        //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
     }
 </script>
