@@ -57,12 +57,12 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <label><input type="radio" id='regular' name="optradio"></label>
+                                <button onclick="myFunction()">Click me</button>
                             </div>
                         </td>
                         <td>{{this.id}}</td>
                         <td>{{this.type}}</td>
-                        <td>{{this.name}}</td>
+                        <td class="nameChest">{{this.name}}</td>
                         <td>{{this.value}}</td>
                         <td>{{this._id}}</td>
                     </tr>
@@ -175,7 +175,7 @@
             </table>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <h4>Legs selected</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -227,7 +227,7 @@
             </table>
         </div>
     </div>
-        <div class="form-group">
+    <div class="form-group">
         <h4>Cloak selected</h4>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -286,6 +286,8 @@
 </form>
 <a class="btn btn-primary" href="/">Return to the Project</a>
 
-<script>
-
+<script type="text/javascript">
+    function myFunction() {
+        document.getElementById('nameChest').readOnly = true;
+    }
 </script>
