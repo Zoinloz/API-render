@@ -180,7 +180,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Legs" value="{{armor.composition.legs}}" readonly
+                <input type="text" class="form-control" id="Legs" name="Legs" value="{{armor.composition.legs}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
@@ -232,20 +232,20 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>ObjectID</label>
-                <input type="text" class="form-control" name="Chest" value="{{armor.composition.claok}}" readonly
+                <input type="text" class="form-control" id="Cloak" name="Cloak" value="{{armor.composition.cloak}}" readonly
                     required>
             </div>
             <div class="form-group col-md-2">
                 <label>ID</label>
-                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+                <input type="text" class="form-control" id="CloakId" name="CloakId" value="{{cloak.id}}" readonly required>
             </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
-                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+                <input type="text" class="form-control" id="CloakName" name="CloakName" value="{{cloak.name}}" readonly required>
             </div>
             <div class="form-group col-md-2">
                 <label>Value</label>
-                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+                <input type="text" class="form-control" id="CloakValue" name="CloakValue" value="{{cloak.value}}" readonly required>
             </div>
         </div>
         <div class="container-fluid">
@@ -265,14 +265,14 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <label><input type="radio" id='regular' name="optradio"></label>
+                                <button onclick="myFunctionCloak({{this.id}})">Select me !</button>
                             </div>
                         </td>
-                        <td>{{this.id}}</td>
-                        <td>{{this.type}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.value}}</td>
-                        <td>{{this._id}}</td>
+                        <td id="tdIdCloak{{this.id}}">{{this.id}}</td>
+                        <td id="tdTypeCloak{{this.id}}">{{this.type}}</td>
+                        <td id="tdNameCloak{{this.id}}">{{this.name}}</td>
+                        <td id="tdValueCloak{{this.id}}">{{this.value}}</td>
+                        <td id="tdIDCloak{{this.id}}">{{this._id}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -333,6 +333,18 @@
         myObjectID.value = document.getElementById('tdIDLegs'+pId).innerHTML;
         myValue.value = document.getElementById('tdValueLegs'+pId).innerHTML;
         myId.value = document.getElementById('tdIdLegs'+pId).innerHTML;
+        //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
+    }
+
+    function myFunctionCloak(pId) {
+        var myName = document.getElementById('CloakName');
+        var myObjectID = document.getElementById('Cloak');
+        var myValue = document.getElementById('CloakValue')
+        var myId = document.getElementById('CloakId');
+        myName.value = document.getElementById('tdNameCloak'+pId).innerHTML;
+        myObjectID.value = document.getElementById('tdIDCloak'+pId).innerHTML;
+        myValue.value = document.getElementById('tdValueCloak'+pId).innerHTML;
+        myId.value = document.getElementById('tdIdCloak'+pId).innerHTML;
         //alert(document.getElementById('tdId'+pId).innerHTML+" " +document.getElementById('tdName'+pId).innerHTML+" "+document.getElementById('tdValue'+pId).innerHTML+" "+document.getElementById('tdID'+pId).innerHTML);
     }
 </script>
