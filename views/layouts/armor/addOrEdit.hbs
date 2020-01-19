@@ -79,6 +79,10 @@
                 <input type="text" class="form-control" name="Chest" value="{{armor.composition.helmet}}" readonly
                     required>
             </div>
+            <div class="form-group col-md-2">
+                <label>ID</label>
+                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+            </div>
             <div class="form-group col-md-4">
                 <label>Name</label>
                 <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
@@ -102,6 +106,162 @@
                 </thead>
                 <tbody>
                     {{#each helmets}}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label><input type="radio" id='regular' name="optradio"></label>
+                            </div>
+                        </td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.type}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.value}}</td>
+                        <td>{{this._id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <h4>Arms selected</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>ObjectID</label>
+                <input type="text" class="form-control" name="Chest" value="{{armor.composition.arm}}" readonly
+                    required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>ID</label>
+                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Value</label>
+                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each arms}}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label><input type="radio" id='regular' name="optradio"></label>
+                            </div>
+                        </td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.type}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.value}}</td>
+                        <td>{{this._id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="form-group">
+        <h4>Legs selected</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>ObjectID</label>
+                <input type="text" class="form-control" name="Chest" value="{{armor.composition.legs}}" readonly
+                    required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>ID</label>
+                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Value</label>
+                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each legs}}
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <label><input type="radio" id='regular' name="optradio"></label>
+                            </div>
+                        </td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.type}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.value}}</td>
+                        <td>{{this._id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="form-group">
+        <h4>Cloak selected</h4>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>ObjectID</label>
+                <input type="text" class="form-control" name="Chest" value="{{armor.composition.claok}}" readonly
+                    required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>ID</label>
+                <input type="text" class="form-control" name="ChestId" value="{{chest.id}}" readonly required>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Name</label>
+                <input type="text" class="form-control" name="ChestName" value="{{helmet.name}}" readonly required>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Value</label>
+                <input type="text" class="form-control" name="ChestValue" value="{{helmet.value}}" readonly required>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cloaks}}
                     <tr>
                         <td>
                             <div class="radio">

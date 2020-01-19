@@ -34,17 +34,16 @@ router.get('/list', (req, res) => {
 router.get('/:id', (req, res) => {
     var allChest;
     var allHelmet;
+    var allArm;
+    var allCloak;
+    var allLegs;
     const optionsGetChest = {
         host: 'localhost',
         port: 3000,
         path: '/chests',
         method: 'GET'
     };
-    //Parameters of the request
     http.request(optionsGetChest, function (result) {
-        // console.log('STATUS: ' + result.statusCode);
-        // console.log('HEADERS: ' + JSON.stringify(result.headers));
-        // result.setEncoding('utf8');
         result.on('data', function (chunk) {
             console.log(JSON.parse(chunk));
             allChest = JSON.parse(chunk).result;
@@ -56,18 +55,50 @@ router.get('/:id', (req, res) => {
         path: '/helmets',
         method: 'GET'
     };
-    //Parameters of the request
     http.request(optionsGetHelmet, function (result) {
-        // console.log('STATUS: ' + result.statusCode);
-        // console.log('HEADERS: ' + JSON.stringify(result.headers));
-        // result.setEncoding('utf8');
         result.on('data', function (chunk) {
             console.log(JSON.parse(chunk));
             allHelmet = JSON.parse(chunk).result;
         });
     }).end();
-
+    const optionsGetCloak = {
+        host: 'localhost',
+        port: 3000,
+        path: '/cloaks',
+        method: 'GET'
+    };
+    http.request(optionsGetCloak, function (result) {
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            allCloak = JSON.parse(chunk).result;
+        });
+    }).end();
+    const optionsGetArms = {
+        host: 'localhost',
+        port: 3000,
+        path: '/arms',
+        method: 'GET'
+    };
+    http.request(optionsGetArms, function (result) {
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            allArm = JSON.parse(chunk).result;
+        });
+    }).end();
+    const optionsGetLegs = {
+        host: 'localhost',
+        port: 3000,
+        path: '/legs',
+        method: 'GET'
+    };
+    http.request(optionsGetLegs, function (result) {
+        result.on('data', function (chunk) {
+            console.log(JSON.parse(chunk));
+            allLegs = JSON.parse(chunk).result;
+        });
+    }).end();
     console.log('Get to show',req.params);
+
     const optionsGetById = {
         host: 'localhost',
         port: 3000,
@@ -88,7 +119,10 @@ router.get('/:id', (req, res) => {
                 message: JSON.parse(chunk).msg,
                 armor: JSON.parse(chunk).result,
                 chests: allChest,
-                helmets: allHelmet
+                helmets: allHelmet,
+                cloaks: allCloak,
+                arms: allArm,
+                legs: allLegs
             });
         });
     }).end();
