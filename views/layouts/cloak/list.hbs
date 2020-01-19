@@ -1,4 +1,4 @@
-<h3>Cloaks List <a class="btn btn-secondary" href="/cloaks/add">Create a Cloak +</a></h3>
+<h3>Cloaks List </h3>
 
 <label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
 <label>Message Result : {{this.message}}</label>
@@ -23,6 +23,7 @@
             <td>{{this._id}}</td>
             <td>
                 <a href="/cloaks/{{this._id}}">Update</a>
+                or
                 <a href="/cloaks/delete/{{this._id}}"
                     onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
             </td>
@@ -30,4 +31,5 @@
         {{/each}}
     </tbody>
 </table>
+<a class="btn btn-secondary" href="/cloaks/add">Create a Cloak +</a>
 <a class="btn btn-primary" href="/">Return to the Project</a>

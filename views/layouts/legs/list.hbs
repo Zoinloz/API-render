@@ -1,6 +1,6 @@
-<h3>Legs List <a class="btn btn-secondary" href="/legs/add">Create a Leg +</a></h3>
-
-<a class="btn btn-primary" href="/">Return to the Project</a>
+<h3>Legs List </h3>
+<label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+<label>Message Result : {{this.message}}</label>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -19,11 +19,13 @@
             <td>{{this.name}}</td>
             <td>{{this.value}}</td>
             <td>
-                <a href="/legs/{{this._id}}" aria-hidden="true"></a>
                 <a href="/legs/{{this._id}}">Update</a>
+                or
                 <a href="/legs/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<a class="btn btn-secondary" href="/legs/add">Create a Leg +</a>
+<a class="btn btn-primary" href="/">Return to the Project</a>

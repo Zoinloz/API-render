@@ -1,5 +1,5 @@
 'use strict';
-
+//root to racine of project views/layouts/racine/racine
 const express = require('express');
 const router = express.Router();
 
