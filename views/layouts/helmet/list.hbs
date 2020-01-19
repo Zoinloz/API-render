@@ -1,13 +1,15 @@
 <h3>Helmets List <a class="btn btn-secondary" href="/helmets/add">Create a Helmet +</a></h3>
 
-<a class="btn btn-primary" href="/">Return to the Project</a>
-<table class="table table-striped">
-    <thead>
+<label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
+<label>Message Result : {{this.message}}</label>
+<table class="table">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Type</th>
             <th>Name</th>
             <th>Value</th>
+            <th>#</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -18,12 +20,14 @@
             <td>{{this.type}}</td>
             <td>{{this.name}}</td>
             <td>{{this.value}}</td>
+            <td>{{this._id}}</td>
             <td>
-                <a href="/helmets/{{this._id}}" aria-hidden="true"></a>
                 <a href="/helmets/{{this._id}}">Update</a>
-                <a href="/helmets/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
+                <a href="/helmets/delete/{{this._id}}"
+                    onclick="return confirm('Are you sure to delete this record ? ');">Delete</a>
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<a class="btn btn-primary" href="/">Return to the Project</a>
