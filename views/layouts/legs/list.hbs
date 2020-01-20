@@ -1,13 +1,14 @@
 <h3>Legs List </h3>
 <label>Statut and Success : {{this.statut}} - {{this.success}} </label><br>
 <label>Message Result : {{this.message}}</label>
-<table class="table table-striped">
-    <thead>
+<table class="table">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Type</th>
             <th>Name</th>
             <th>Value</th>
+            <th>#</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -18,6 +19,7 @@
             <td>{{this.type}}</td>
             <td>{{this.name}}</td>
             <td>{{this.value}}</td>
+            <td>{{this._id}}</td>
             <td>
                 <a href="/legs/{{this._id}}">Update</a>
                 or
